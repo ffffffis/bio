@@ -2,34 +2,49 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Арикси</title>
-  
-  <!-- Подключаем CSS -->
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-  <!-- ГЛАВНАЯ КАРТОЧКА -->
+
+  <!-- ===== АНИМИРОВАННЫЙ ФОН ===== -->
+  <canvas id="particles"></canvas>
+
+  <!-- ===== ГЛАВНАЯ КАРТОЧКА ===== -->
   <div class="main-card">
-    <div class="avatar">А</div>
+    <!-- АВАТАР -->
+    <div class="avatar">
+      <img src="images/avatar.jpg" alt="Арикси" class="avatar-img" />
+    </div>
+
     <div class="name">Арикси</div>
 
+    <!-- КНОПКИ -->
     <a href="https://www.tiktok.com/@ar1xy.kz" target="_blank" class="main-btn btn-tiktok">
-      <img src="images/tiktok.png" alt="TikTok" /> TikTok
+      <img src="images/tiktok.png" alt="TikTok" class="btn-icon" />
+      TikTok
     </a>
 
     <button class="main-btn btn-projects" onclick="openModal('projectsModal')">
-      <img src="images/telegram.png" alt="Telegram" /> Telegram проекты
+      <img src="images/telegram.png" alt="Telegram" class="btn-icon" />
+      Telegram проекты
     </button>
 
     <button class="main-btn btn-functions" onclick="openModal('functionsModal')">
-      <img src="images/tools.png" alt="Инструменты" /> Инструменты
+      <img src="images/tools.png" alt="Tools" class="btn-icon" />
+      Инструменты
+    </button>
+
+    <button class="main-btn btn-contacts" onclick="openModal('contactsModal')">
+      <img src="images/telegram.png" alt="Telegram" class="btn-icon" />
+      Где меня найти
     </button>
 
     <div class="footer">by <span>Арикси</span></div>
   </div>
 
-  <!-- МОДАЛКА: ПРОЕКТЫ -->
+  <!-- ===== МОДАЛКА: ПРОЕКТЫ ===== -->
   <div class="modal-overlay" id="projectsModal">
     <div class="modal">
       <div class="modal-header">
@@ -39,7 +54,9 @@
 
       <div class="project-item">
         <div class="project-info">
-          <div class="project-logo"><img src="images/rtp-logo.png" alt="Rtp Tun" /></div>
+          <div class="project-logo">
+            <img src="images/rtp-logo.png" alt="Rtp Tun" />
+          </div>
           <h3>Rtp Tun | Kirby</h3>
         </div>
         <a href="https://t.me/RtpTunKirby" target="_blank" class="project-link">Перейти</a>
@@ -47,7 +64,9 @@
 
       <div class="project-item">
         <div class="project-info">
-          <div class="project-logo"><img src="images/codavrix-logo.png" alt="Codavrix" /></div>
+          <div class="project-logo">
+            <img src="images/codavrix-logo.png" alt="Codavrix" />
+          </div>
           <h3>Форум Codavrix</h3>
         </div>
         <a href="https://t.me/codavrix_forum" target="_blank" class="project-link">Перейти</a>
@@ -55,7 +74,9 @@
 
       <div class="project-item">
         <div class="project-info">
-          <div class="project-logo"><img src="images/deathnote-logo.png" alt="DeathNote" /></div>
+          <div class="project-logo">
+            <img src="images/deathnote-logo.png" alt="DeathNote" />
+          </div>
           <h3>DeathNote_ar1xy</h3>
         </div>
         <a href="https://t.me/DeathNote_ar1xy" target="_blank" class="project-link">Перейти</a>
@@ -63,20 +84,78 @@
     </div>
   </div>
 
-  <!-- МОДАЛКА: ИНСТРУМЕНТЫ -->
+  <!-- ===== МОДАЛКА: ИНСТРУМЕНТЫ ===== -->
   <div class="modal-overlay" id="functionsModal">
     <div class="modal">
       <div class="modal-header">
         <h2>🛠 Инструменты</h2>
         <button class="modal-close" onclick="closeModal('functionsModal')">✕</button>
       </div>
+
       <a href="https://t.me/djskejfb" target="_blank" class="key-btn">
         🔑 Бесплатный ключ Rtp Tun
       </a>
     </div>
   </div>
 
-  <!-- Подключаем JavaScript -->
+  <!-- ===== МОДАЛКА: КОНТАКТЫ ===== -->
+  <div class="modal-overlay" id="contactsModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>📍 Где меня найти</h2>
+        <button class="modal-close" onclick="closeModal('contactsModal')">✕</button>
+      </div>
+
+      <div class="contact-item">
+        <div class="contact-info">
+          <span class="contact-star">🌟</span>
+          <span class="contact-name">@RtpBox</span>
+        </div>
+        <a href="https://t.me/RtpBox" target="_blank" class="contact-link">Перейти</a>
+      </div>
+
+      <div class="contact-item">
+        <div class="contact-info">
+          <span class="contact-star"> </span>
+          <span class="contact-name">@RtpBoxgroup</span>
+        </div>
+        <a href="https://t.me/RtpBoxgroup" target="_blank" class="contact-link">Перейти</a>
+      </div>
+
+      <div class="contact-item">
+        <div class="contact-info">
+          <span class="contact-star">🌟</span>
+          <span class="contact-name">@XDPORTALFORUM</span>
+        </div>
+        <a href="https://t.me/XDPORTALFORUM" target="_blank" class="contact-link">Перейти</a>
+      </div>
+
+      <div class="contact-item">
+        <div class="contact-info">
+          <span class="contact-star"> </span>
+          <span class="contact-name">@FKFORUM</span>
+        </div>
+        <a href="https://t.me/FKFORUM" target="_blank" class="contact-link">Перейти</a>
+      </div>
+
+      <div class="contact-item">
+        <div class="contact-info">
+          <span class="contact-star">🌟</span>
+          <span class="contact-name">@wildVF</span>
+        </div>
+        <a href="https://t.me/wildVF" target="_blank" class="contact-link">Перейти</a>
+      </div>
+
+      <div class="contact-item">
+        <div class="contact-info">
+          <span class="contact-star"> </span>
+          <span class="contact-name">@RaViraNet</span>
+        </div>
+        <a href="https://t.me/RaViraNet" target="_blank" class="contact-link">Перейти</a>
+      </div>
+    </div>
+  </div>
+
   <script src="js/script.js"></script>
 </body>
 </html>
