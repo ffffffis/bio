@@ -1,4 +1,6 @@
-/* ===== БАЗОВЫЙ СБРОС ===== */
+/* ============================================
+   БАЗОВЫЙ СБРОС И ФОН
+============================================ */
 * {
   margin: 0;
   padding: 0;
@@ -6,132 +8,220 @@
 }
 
 body {
-  background: #0a0a0f;
+  background: #000000;
   font-family: 'Courier New', monospace;
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 20px;
-  background-image: 
-    linear-gradient(rgba(255, 215, 0, 0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 215, 0, 0.02) 1px, transparent 1px);
-  background-size: 40px 40px;
+  overflow: hidden;
 }
 
-/* ===== ГЛАВНАЯ КАРТОЧКА ===== */
+/* ============================================
+   АНИМИРОВАННЫЙ ФОН (ЧАСТИЦЫ)
+============================================ */
+#particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ============================================
+   ГЛАВНАЯ КАРТОЧКА (ЖИДКОЕ СТЕКЛО)
+============================================ */
 .main-card {
+  position: relative;
+  z-index: 1;
   max-width: 420px;
   width: 100%;
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(20px);
-  border-radius: 24px;
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 28px;
   padding: 40px 28px 30px;
-  border: 1px solid rgba(255, 215, 0, 0.08);
-  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8);
+  border: 1px solid rgba(255, 158, 181, 0.12);
+  box-shadow: 
+    0 30px 80px rgba(0, 0, 0, 0.8),
+    0 0 60px rgba(255, 158, 181, 0.03),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
   text-align: center;
-  animation: fadeIn 0.5s ease;
+  animation: fadeIn 0.8s ease;
+  overflow: hidden;
 }
 
-/* ===== НЕОНОВАЯ АВАТАРКА ===== */
+/* ЖИДКИЙ БЛЕСК НА СТЕКЛЕ */
+.main-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0%,
+    rgba(255, 158, 181, 0.04) 25%,
+    transparent 50%,
+    rgba(255, 123, 156, 0.04) 75%,
+    transparent 100%
+  );
+  animation: liquidShine 10s linear infinite;
+  pointer-events: none;
+  z-index: -1;
+}
+
+@keyframes liquidShine {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* ============================================
+   АВАТАР
+============================================ */
 .avatar {
-  width: 120px;
-  height: 120px;
+  width: 110px;
+  height: 110px;
   border-radius: 50%;
   margin: 0 auto 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 52px;
-  font-weight: 900;
-  color: #ffd700;
-  background: #0a0a0f;
-  border: 2px solid rgba(255, 215, 0, 0.3);
-  box-shadow: 0 0 30px rgba(255, 215, 0, 0.15);
-  animation: neonPulse 2s ease-in-out infinite;
-  user-select: none;
+  overflow: hidden;
+  background: radial-gradient(circle at 30% 30%, #FF9EB5, #FF7B9C);
+  box-shadow: 
+    0 0 40px rgba(255, 158, 181, 0.2),
+    0 0 80px rgba(255, 158, 181, 0.05);
+  animation: avatarGlow 3s ease-in-out infinite;
+  position: relative;
 }
 
-@keyframes neonPulse {
-  0%, 100% {
-    box-shadow: 0 0 20px rgba(255, 215, 0, 0.1);
-    border-color: rgba(255, 215, 0, 0.2);
+.avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Блик на аватарке */
+.avatar::after {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 20px;
+  width: 30px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 50%;
+  transform: rotate(-30deg);
+  filter: blur(2px);
+  pointer-events: none;
+}
+
+@keyframes avatarGlow {
+  0%, 100% { 
+    box-shadow: 0 0 30px rgba(255, 158, 181, 0.15);
   }
-  50% {
-    box-shadow: 0 0 50px rgba(255, 215, 0, 0.3), 0 0 100px rgba(255, 215, 0, 0.1);
-    border-color: rgba(255, 215, 0, 0.6);
+  50% { 
+    box-shadow: 0 0 60px rgba(255, 158, 181, 0.3);
   }
 }
 
 .name {
-  color: #fff;
+  color: #FFFFFF;
   font-size: 28px;
   font-weight: 700;
   letter-spacing: 1px;
   margin-bottom: 28px;
+  text-shadow: 0 0 40px rgba(255, 158, 181, 0.1);
 }
 
-/* ===== КНОПКИ ===== */
+/* ============================================
+   КНОПКИ
+============================================ */
 .main-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
+  gap: 10px;
   width: 100%;
   padding: 14px;
   margin-bottom: 10px;
-  border: none;
-  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 14px;
   font-family: 'Courier New', monospace;
   font-size: 16px;
   font-weight: 600;
-  color: #fff;
+  color: #FFFFFF;
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: all 0.3s ease;
   text-decoration: none;
-  letter-spacing: 0.5px;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Эффект скользящего свечения */
+.main-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 158, 181, 0.05), transparent);
+  transition: 0.6s ease;
+}
+
+.main-btn:hover::before {
+  left: 100%;
 }
 
 .main-btn:active {
   transform: scale(0.97);
 }
 
-.main-btn img {
-  width: 24px;
-  height: 24px;
+.btn-icon {
+  width: 22px;
+  height: 22px;
   object-fit: contain;
+  filter: brightness(0) invert(1);
 }
 
-.btn-tiktok {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-}
-.btn-tiktok:hover {
-  background: rgba(255, 255, 255, 0.08);
-  transform: translateY(-2px);
-}
-
-.btn-projects {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-}
-.btn-projects:hover {
-  background: rgba(255, 255, 255, 0.08);
+.btn-tiktok:hover,
+.btn-projects:hover,
+.btn-contacts:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 158, 181, 0.2);
   transform: translateY(-2px);
 }
 
 .btn-functions {
-  background: linear-gradient(135deg, #f7971e, #ffd200);
-  color: #0a0a0f;
+  background: linear-gradient(135deg, rgba(255, 158, 181, 0.15), rgba(232, 32, 88, 0.15));
+  border-color: rgba(255, 158, 181, 0.2);
+  color: #FF9EB5;
   font-weight: 700;
-  box-shadow: 0 4px 30px rgba(255, 215, 0, 0.15);
-}
-.btn-functions:hover {
-  box-shadow: 0 6px 40px rgba(255, 215, 0, 0.3);
-  transform: translateY(-2px);
+  box-shadow: 0 4px 30px rgba(255, 158, 181, 0.05);
 }
 
-/* ===== МОДАЛЬНЫЕ ОКНА ===== */
+.btn-functions:hover {
+  background: linear-gradient(135deg, rgba(255, 158, 181, 0.25), rgba(232, 32, 88, 0.25));
+  border-color: rgba(255, 158, 181, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 40px rgba(255, 158, 181, 0.1);
+}
+
+/* ============================================
+   МОДАЛКИ (ЖИДКОЕ СТЕКЛО)
+============================================ */
 .modal-overlay {
   display: none;
   position: fixed;
@@ -139,8 +229,9 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.8);
-  backdrop-filter: blur(8px);
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   z-index: 1000;
   justify-content: center;
   align-items: center;
@@ -149,20 +240,51 @@ body {
 
 .modal-overlay.active {
   display: flex;
-  animation: fadeIn 0.2s ease;
+  animation: fadeIn 0.3s ease;
 }
 
 .modal {
-  background: #12121a;
-  border-radius: 20px;
+  position: relative;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-radius: 24px;
   max-width: 400px;
   width: 100%;
   padding: 28px 24px;
-  border: 1px solid rgba(255, 215, 0, 0.06);
-  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.9);
-  animation: slideUp 0.2s ease;
+  border: 1px solid rgba(255, 158, 181, 0.08);
+  box-shadow: 
+    0 40px 80px rgba(0, 0, 0, 0.9),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  animation: slideUp 0.3s ease;
   max-height: 80vh;
   overflow-y: auto;
+}
+
+/* Жидкий блеск на модалке */
+.modal::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0%,
+    rgba(255, 158, 181, 0.03) 25%,
+    transparent 50%,
+    rgba(255, 123, 156, 0.03) 75%,
+    transparent 100%
+  );
+  animation: liquidShine 12s linear infinite;
+  pointer-events: none;
+  z-index: -1;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .modal-header {
@@ -173,21 +295,22 @@ body {
 }
 
 .modal-header h2 {
-  color: #ffd700;
+  color: #FF9EB5;
   font-size: 20px;
   letter-spacing: 0.5px;
+  text-shadow: 0 0 30px rgba(255, 158, 181, 0.05);
 }
 
 .modal-close {
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.06);
-  color: #fff;
+  color: #FFFFFF;
   width: 36px;
   height: 36px;
   border-radius: 50%;
   font-size: 18px;
   cursor: pointer;
-  transition: 0.15s;
+  transition: 0.3s;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -195,18 +318,29 @@ body {
 
 .modal-close:hover {
   background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 158, 181, 0.2);
+  transform: rotate(90deg);
 }
 
-/* ===== ПРОЕКТЫ ===== */
+/* ============================================
+   ПРОЕКТЫ
+============================================ */
 .project-item {
   background: rgba(255, 255, 255, 0.02);
-  border-radius: 12px;
+  border-radius: 14px;
   padding: 14px 16px;
   margin-bottom: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   border: 1px solid rgba(255, 255, 255, 0.04);
+  transition: 0.3s ease;
+}
+
+.project-item:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 158, 181, 0.08);
+  transform: translateX(4px);
 }
 
 .project-info {
@@ -222,7 +356,7 @@ body {
   border-radius: 50%;
   overflow: hidden;
   flex-shrink: 0;
-  background: rgba(255, 215, 0, 0.08);
+  background: rgba(255, 158, 181, 0.08);
 }
 
 .project-logo img {
@@ -232,81 +366,135 @@ body {
 }
 
 .project-info h3 {
-  color: #fff;
+  color: #FFFFFF;
   font-size: 15px;
 }
 
 .project-link {
-  background: rgba(255, 215, 0, 0.1);
-  color: #ffd700;
+  background: rgba(255, 158, 181, 0.08);
+  color: #FF9EB5;
   padding: 6px 14px;
   border-radius: 30px;
   text-decoration: none;
   font-size: 13px;
   font-weight: 500;
-  transition: 0.15s;
+  transition: 0.3s;
   font-family: 'Courier New', monospace;
 }
 
 .project-link:hover {
-  background: rgba(255, 215, 0, 0.2);
+  background: rgba(255, 158, 181, 0.15);
+  color: #FFB8CC;
 }
 
-/* ===== КЛЮЧ ===== */
+/* ============================================
+   КЛЮЧ
+============================================ */
 .key-btn {
   display: block;
   width: 100%;
   padding: 16px;
-  background: linear-gradient(135deg, #f7971e, #ffd200);
-  border: none;
-  border-radius: 12px;
-  color: #0a0a0f;
+  background: linear-gradient(135deg, rgba(255, 158, 181, 0.2), rgba(232, 32, 88, 0.2));
+  border: 1px solid rgba(255, 158, 181, 0.15);
+  border-radius: 14px;
+  color: #FF9EB5;
   font-family: 'Courier New', monospace;
   font-size: 18px;
   font-weight: 700;
   cursor: pointer;
-  transition: 0.15s;
+  transition: 0.3s;
   text-decoration: none;
   text-align: center;
-  box-shadow: 0 4px 30px rgba(255, 215, 0, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .key-btn:hover {
-  box-shadow: 0 6px 40px rgba(255, 215, 0, 0.25);
+  background: linear-gradient(135deg, rgba(255, 158, 181, 0.3), rgba(232, 32, 88, 0.3));
+  border-color: rgba(255, 158, 181, 0.3);
   transform: translateY(-2px);
+  box-shadow: 0 8px 40px rgba(255, 158, 181, 0.1);
 }
 
-/* ===== ПОДВАЛ ===== */
+/* ============================================
+   КОНТАКТЫ
+============================================ */
+.contact-item {
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 12px;
+  padding: 12px 16px;
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  transition: 0.3s ease;
+}
+
+.contact-item:hover {
+  background: rgba(255, 255, 255, 0.04);
+  transform: translateX(4px);
+}
+
+.contact-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.contact-star {
+  color: #FF9EB5;
+  font-size: 16px;
+}
+
+.contact-name {
+  color: #FFFFFF;
+  font-size: 15px;
+  font-family: 'Courier New', monospace;
+}
+
+.contact-link {
+  background: rgba(255, 158, 181, 0.08);
+  color: #FF9EB5;
+  padding: 4px 12px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 500;
+  transition: 0.3s;
+  font-family: 'Courier New', monospace;
+}
+
+.contact-link:hover {
+  background: rgba(255, 158, 181, 0.15);
+}
+
+/* ============================================
+   ПОДВАЛ
+============================================ */
 .footer {
-  color: #333;
+  color: rgba(255, 255, 255, 0.15);
   font-size: 12px;
   margin-top: 28px;
   letter-spacing: 0.5px;
 }
 
 .footer span {
-  color: #ffd700;
+  color: #FF9EB5;
 }
 
-/* ===== АНИМАЦИИ ===== */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes slideUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* ===== СКРОЛЛ В МОДАЛКАХ ===== */
+/* ============================================
+   СКРОЛЛ
+============================================ */
 .modal::-webkit-scrollbar {
   width: 3px;
 }
+
 .modal::-webkit-scrollbar-track {
   background: transparent;
 }
+
 .modal::-webkit-scrollbar-thumb {
-  background: #333;
+  background: rgba(255, 158, 181, 0.2);
   border-radius: 10px;
 }
