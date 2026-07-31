@@ -12,13 +12,14 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 300);
     }
 
-    // ===== TELEGRAM: открытие модального окна =====
+    // ===== TELEGRAM =====
     const tgButton = document.querySelector('.card1');
     console.log('🔍 Кнопка Telegram найдена:', tgButton);
     
     if (tgButton) {
         tgButton.addEventListener('click', function(e) {
             e.preventDefault();
+            e.stopPropagation();
             console.log('📱 Нажата кнопка Telegram');
             openModal();
         });
@@ -26,13 +27,14 @@ document.addEventListener('DOMContentLoaded', function() {
         console.error('❌ Кнопка Telegram не найдена!');
     }
 
-    // ===== TIKTOK: переход по ссылке =====
+    // ===== TIKTOK =====
     const tiktokButton = document.querySelector('.card2');
     console.log('🔍 Кнопка TikTok найдена:', tiktokButton);
     
     if (tiktokButton) {
         tiktokButton.addEventListener('click', function(e) {
             e.preventDefault();
+            e.stopPropagation();
             console.log('🎵 Нажата кнопка TikTok');
             window.open('https://www.tiktok.com/@ar1xy.kz', '_blank');
         });
@@ -40,13 +42,14 @@ document.addEventListener('DOMContentLoaded', function() {
         console.error('❌ Кнопка TikTok не найдена!');
     }
 
-    // ===== КЛЮЧ: открытие модального окна =====
+    // ===== КЛЮЧ =====
     const keyButton = document.querySelector('.card4');
     console.log('🔍 Кнопка Ключ найдена:', keyButton);
     
     if (keyButton) {
         keyButton.addEventListener('click', function(e) {
             e.preventDefault();
+            e.stopPropagation();
             console.log('🔑 Нажата кнопка Ключ');
             openKeyModal();
         });
@@ -174,7 +177,7 @@ function openModal() {
     }
 }
 
-// ===== МОДАЛЬНОЕ ОКНО ДЛЯ КЛЮЧА (1 КНОПКА) =====
+// ===== МОДАЛЬНОЕ ОКНО ДЛЯ КЛЮЧА =====
 function openKeyModal() {
     console.log('🔑 Открываем окно получения ключа...');
     
@@ -197,7 +200,7 @@ function openKeyModal() {
         const buttonsContainer = document.createElement('div');
         buttonsContainer.className = 'modal-buttons';
         
-        // ===== ЕДИНСТВЕННАЯ КНОПКА: Получить ключ RTP TUN =====
+        // ===== ЕДИНСТВЕННАЯ КНОПКА =====
         const btn1 = document.createElement('button');
         btn1.className = 'modal-btn';
         btn1.innerHTML = `
@@ -214,7 +217,6 @@ function openKeyModal() {
         btn1.addEventListener('click', function(e) {
             e.stopPropagation();
             console.log('🔗 Переход по ссылке для получения ключа');
-            // ===== СЮДА ВСТАВЬ СВОЮ ССЫЛКУ =====
             window.open('https://t.me/RtpTunKirby', '_blank');
             document.body.removeChild(overlay);
         });
