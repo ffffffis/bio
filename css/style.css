@@ -377,7 +377,7 @@ html, body {
     gap: 12px;
 }
 
-/* ===== КНОПКИ В МОДАЛЬНОМ ОКНЕ ===== */
+/* ===== КНОПКИ В МОДАЛЬНОМ ОКНЕ (Telegram и Ключ) ===== */
 .modal-btn {
     font-family: inherit;
     font-size: 20px;
@@ -436,6 +436,76 @@ html, body {
     to { transform: translateY(-0.1em); }
 }
 
+/* ===== КНОПКИ В МОДАЛЬНОМ ОКНЕ СООБЩЕСТВА ===== */
+.modal-btn-community {
+    font-size: 18px;
+    color: #e1e1e1;
+    font-family: inherit;
+    font-weight: 800;
+    cursor: pointer;
+    position: relative;
+    border: none;
+    background: none;
+    text-transform: uppercase;
+    transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition-duration: 400ms;
+    transition-property: color;
+    padding: 14px 20px;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.modal-btn-community:focus,
+.modal-btn-community:hover {
+    color: #fff;
+}
+
+.modal-btn-community:focus:after,
+.modal-btn-community:hover:after {
+    width: 100%;
+    left: 0%;
+}
+
+.modal-btn-community:after {
+    content: "";
+    pointer-events: none;
+    bottom: -2px;
+    left: 50%;
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    background-color: #fff;
+    transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition-duration: 400ms;
+    transition-property: width, left;
+}
+
+.modal-btn-community .svg-wrapper-1 {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.modal-btn-community .svg-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.modal-btn-community svg {
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
+}
+
+.modal-btn-community span {
+    display: block;
+    white-space: nowrap;
+}
+
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
@@ -462,5 +532,9 @@ html, body {
     .modal-btn {
         font-size: 16px;
         padding: 0.6em 0.8em;
+    }
+    .modal-btn-community {
+        font-size: 15px;
+        padding: 10px 15px;
     }
 }
