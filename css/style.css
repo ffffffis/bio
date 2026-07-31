@@ -377,7 +377,7 @@ html, body {
     gap: 12px;
 }
 
-/* ===== КНОПКИ В МОДАЛЬНОМ ОКНЕ (ИСПРАВЛЕНО) ===== */
+/* ===== КНОПКИ В МОДАЛЬНОМ ОКНЕ ===== */
 .modal-btn {
     font-family: inherit;
     font-size: 20px;
@@ -410,13 +410,12 @@ html, body {
 
 .modal-btn span {
     display: block;
-    transition: all 0.3s ease-in-out;
     white-space: nowrap;
+    transition: none;
 }
 
 .modal-btn svg {
     display: block;
-    transform-origin: center center;
     transition: transform 0.3s ease-in-out;
 }
 
@@ -425,12 +424,7 @@ html, body {
 }
 
 .modal-btn:hover svg {
-    transform: rotate(45deg) scale(1.1);
-}
-
-/* Убираем улетание текста */
-.modal-btn:hover span {
-    transform: none;
+    transform: translateX(0.8em) rotate(45deg) scale(1.1);
 }
 
 .modal-btn:active {
