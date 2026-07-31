@@ -31,7 +31,6 @@ html, body {
     z-index: 0;
 }
 
-/* Base Sky Layer */
 .bg-container .sky-canvas {
     width: 100%;
     height: 100%;
@@ -40,7 +39,6 @@ html, body {
     background: #050505;
 }
 
-/* Generic star layer style */
 .bg-container .stars {
     position: absolute;
     inset: 0;
@@ -48,7 +46,6 @@ html, body {
     pointer-events: none;
 }
 
-/* Layer 1: Small fast twinkling stars - High density */
 .bg-container .stars-1 {
     background-image: radial-gradient(1px 1px at 10% 10%, #fff, transparent),
         radial-gradient(1px 1px at 30% 20%, #fff, transparent),
@@ -59,7 +56,6 @@ html, body {
     animation: twinkle 3s ease-in-out infinite;
 }
 
-/* Layer 2: Medium slower twinkling stars */
 .bg-container .stars-2 {
     background-image: radial-gradient(1.5px 1.5px at 20% 40%, #fff, transparent),
         radial-gradient(1.5px 1.5px at 60% 85%, #fff, transparent),
@@ -68,7 +64,6 @@ html, body {
     animation: twinkle 5s ease-in-out infinite 1s;
 }
 
-/* Layer 3: Larger, very slow twinkling stars */
 .bg-container .stars-3 {
     background-image: radial-gradient(2px 2px at 40% 70%, #fff, transparent),
         radial-gradient(2px 2px at 10% 80%, #fff, transparent),
@@ -77,7 +72,6 @@ html, body {
     animation: twinkle 7s ease-in-out infinite 2s;
 }
 
-/* Meteor / Shooting Star Layer */
 .bg-container .meteor {
     position: absolute;
     width: 2px;
@@ -89,7 +83,6 @@ html, body {
     pointer-events: none;
 }
 
-/* Meteor Tail */
 .bg-container .meteor::after {
     content: "";
     position: absolute;
@@ -100,7 +93,6 @@ html, body {
     background: linear-gradient(90deg, #fff, transparent);
 }
 
-/* Meteor Instances with staggered starts */
 .bg-container .m1 {
     top: 10%;
     left: 110%;
@@ -117,7 +109,6 @@ html, body {
     animation: shoot 10s linear infinite 2s;
 }
 
-/* The Moon */
 .bg-container .moon {
     position: absolute;
     top: 15%;
@@ -131,26 +122,17 @@ html, body {
     z-index: 10;
 }
 
-/* Twinkle Animation */
 @keyframes twinkle {
-    0%,
-    100% {
-        opacity: 1;
-    }
-    50% {
-        opacity: 0.2;
-    }
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.2; }
 }
 
-/* Shooting Star Animation */
 @keyframes shoot {
     0% {
         transform: translateX(0) translateY(0) rotate(-35deg);
         opacity: 0;
     }
-    5% {
-        opacity: 1;
-    }
+    5% { opacity: 1; }
     15% {
         transform: translateX(-1500px) translateY(1000px) rotate(-35deg);
         opacity: 0;
@@ -291,7 +273,7 @@ html, body {
     fill: #ffffff;
 }
 
-/* ===== КАРТОЧКА 3: ИНСТРУМЕНТЫ ===== */
+/* ===== КАРТОЧКА 3: СООБЩЕСТВО ===== */
 .card3 {
     border-radius: 8px 8px 8px 80px;
     background: rgba(255, 255, 255, 0.95);
@@ -333,4 +315,155 @@ html, body {
 
 .card4:hover svg {
     fill: #fff;
+}
+
+/* ===== МОДАЛЬНОЕ ОКНО ===== */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease;
+}
+
+.modal-window {
+    background: #1a1a2e;
+    border-radius: 24px;
+    padding: 40px 35px 35px;
+    max-width: 420px;
+    width: 90%;
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+    animation: slideUp 0.3s ease;
+}
+
+.modal-close {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 22px;
+    cursor: pointer;
+    transition: 0.2s;
+    padding: 4px 8px;
+    border-radius: 8px;
+}
+
+.modal-close:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.modal-title {
+    color: #fff;
+    font-size: 22px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 25px;
+    letter-spacing: 0.5px;
+}
+
+.modal-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* ===== КНОПКИ В МОДАЛЬНОМ ОКНЕ ===== */
+.modal-btn {
+    font-family: inherit;
+    font-size: 20px;
+    background: royalblue;
+    color: white;
+    padding: 0.7em 1em;
+    padding-left: 0.9em;
+    display: flex;
+    align-items: center;
+    border: none;
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.2s;
+    cursor: pointer;
+    width: 100%;
+    justify-content: center;
+}
+
+.modal-btn .svg-wrapper-1 {
+    display: flex;
+    align-items: center;
+}
+
+.modal-btn .svg-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.modal-btn span {
+    display: block;
+    margin-left: 0.3em;
+    transition: all 0.3s ease-in-out;
+}
+
+.modal-btn svg {
+    display: block;
+    transform-origin: center center;
+    transition: transform 0.3s ease-in-out;
+}
+
+.modal-btn:hover .svg-wrapper {
+    animation: fly-1 0.6s ease-in-out infinite alternate;
+}
+
+.modal-btn:hover svg {
+    transform: translateX(1.2em) rotate(45deg) scale(1.1);
+}
+
+.modal-btn:hover span {
+    transform: translateX(5em);
+}
+
+.modal-btn:active {
+    transform: scale(0.95);
+}
+
+@keyframes fly-1 {
+    from { transform: translateY(0.1em); }
+    to { transform: translateY(-0.1em); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(30px) scale(0.95);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+}
+
+@media (max-width: 480px) {
+    .modal-window {
+        padding: 30px 20px 25px;
+    }
+    .modal-title {
+        font-size: 18px;
+    }
+    .modal-btn {
+        font-size: 16px;
+        padding: 0.6em 0.8em;
+    }
 }
