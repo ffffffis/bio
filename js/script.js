@@ -42,6 +42,21 @@ document.addEventListener('DOMContentLoaded', function() {
         console.error('❌ Кнопка TikTok не найдена!');
     }
 
+    // ===== СООБЩЕСТВО =====
+    const communityButton = document.querySelector('.card3');
+    console.log('🔍 Кнопка Сообщество найдена:', communityButton);
+    
+    if (communityButton) {
+        communityButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('👥 Нажата кнопка Сообщество');
+            openCommunityModal();
+        });
+    } else {
+        console.error('❌ Кнопка Сообщество не найдена!');
+    }
+
     // ===== КЛЮЧ =====
     const keyButton = document.querySelector('.card4');
     console.log('🔍 Кнопка Ключ найдена:', keyButton);
@@ -217,7 +232,7 @@ function openKeyModal() {
         btn1.addEventListener('click', function(e) {
             e.stopPropagation();
             console.log('🔗 Переход по ссылке для получения ключа');
-            window.open('https://t.me/RtpTunKirby', '_blank');
+            window.open('https://t.me/djskejfb/3', '_blank');
             document.body.removeChild(overlay);
         });
         
@@ -249,5 +264,102 @@ function openKeyModal() {
         
     } catch (error) {
         console.error('❌ Ошибка при открытии модального окна:', error);
+    }
+}
+
+// ===== МОДАЛЬНОЕ ОКНО ДЛЯ СООБЩЕСТВА =====
+function openCommunityModal() {
+    console.log('👥 Открываем окно сообщества...');
+    
+    if (document.querySelector('.modal-overlay')) {
+        console.log('⚠️ Модальное окно уже открыто');
+        return;
+    }
+    
+    try {
+        const overlay = document.createElement('div');
+        overlay.className = 'modal-overlay';
+        
+        const modal = document.createElement('div');
+        modal.className = 'modal-window';
+        
+        const title = document.createElement('h2');
+        title.textContent = 'Проекты, где я тестер';
+        title.className = 'modal-title';
+        
+        const buttonsContainer = document.createElement('div');
+        buttonsContainer.className = 'modal-buttons';
+        
+        // ===== КНОПКА 1: Rtp Tun =====
+        const btn1 = document.createElement('button');
+        btn1.className = 'modal-btn-community';
+        btn1.innerHTML = `
+            <div class="svg-wrapper-1">
+                <div class="svg-wrapper">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                        <path fill="none" d="M0 0h24v24H0z"></path>
+                        <path fill="currentColor" d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"></path>
+                    </svg>
+                </div>
+            </div>
+            <span>Rtp Tun</span>
+        `;
+        btn1.addEventListener('click', function(e) {
+            e.stopPropagation();
+            console.log('🔗 Переход в Rtp Tun');
+            window.open('https://t.me/RtpBox', '_blank');
+            document.body.removeChild(overlay);
+        });
+        
+        // ===== КНОПКА 2: Pixtogram =====
+        const btn2 = document.createElement('button');
+        btn2.className = 'modal-btn-community';
+        btn2.innerHTML = `
+            <div class="svg-wrapper-1">
+                <div class="svg-wrapper">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                        <path fill="none" d="M0 0h24v24H0z"></path>
+                        <path fill="currentColor" d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"></path>
+                    </svg>
+                </div>
+            </div>
+            <span>Pixtogram</span>
+        `;
+        btn2.addEventListener('click', function(e) {
+            e.stopPropagation();
+            console.log('🔗 Переход в Pixtogram');
+            window.open('https://t.me/pixtogram', '_blank');
+            document.body.removeChild(overlay);
+        });
+        
+        const closeBtn = document.createElement('button');
+        closeBtn.className = 'modal-close';
+        closeBtn.textContent = '✕';
+        closeBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            console.log('❌ Закрываем модальное окно');
+            document.body.removeChild(overlay);
+        });
+        
+        buttonsContainer.appendChild(btn1);
+        buttonsContainer.appendChild(btn2);
+        
+        modal.appendChild(closeBtn);
+        modal.appendChild(title);
+        modal.appendChild(buttonsContainer);
+        
+        overlay.appendChild(modal);
+        document.body.appendChild(overlay);
+        console.log('✅ Модальное окно сообщества открыто');
+        
+        overlay.addEventListener('click', function(e) {
+            if (e.target === overlay) {
+                console.log('❌ Закрываем по клику на фон');
+                document.body.removeChild(overlay);
+            }
+        });
+        
+    } catch (error) {
+        console.error('❌ Ошибка при открытии модального окна сообщества:', error);
     }
 }
