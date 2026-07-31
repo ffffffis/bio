@@ -1,129 +1,126 @@
-// ============================================
-// МОДАЛКИ
-// ============================================
+// script.js
+console.log('🌙 Сайт Арикси загружен!');
 
-function openModal(id) {
-  document.getElementById(id).classList.add('active');
-  document.body.style.overflow = 'hidden';
-}
+document.addEventListener('DOMContentLoaded', function() {
+    const content = document.querySelector('.content');
+    content.style.opacity = '0';
+    content.style.transition = 'opacity 1.5s ease';
+    
+    setTimeout(() => {
+        content.style.opacity = '1';
+    }, 300);
 
-function closeModal(id) {
-  document.getElementById(id).classList.remove('active');
-  document.body.style.overflow = '';
-}
-
-// Закрытие по клику на фон
-document.querySelectorAll('.modal-overlay').forEach(overlay => {
-  overlay.addEventListener('click', function(e) {
-    if (e.target === this) {
-      this.classList.remove('active');
-      document.body.style.overflow = '';
-    }
-  });
-});
-
-// Закрытие по Escape
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') {
-    document.querySelectorAll('.modal-overlay.active').forEach(modal => {
-      modal.classList.remove('active');
-      document.body.style.overflow = '';
+    // ===== TELEGRAM: открытие модального окна =====
+    const tgButton = document.querySelector('.card1');
+    tgButton.addEventListener('click', function() {
+        openModal();
     });
-  }
+
+    // ===== TIKTOK: переход по ссылке =====
+    const tiktokButton = document.querySelector('.card2');
+    tiktokButton.addEventListener('click', function() {
+        window.open('https://www.tiktok.com/@ar1xy.kz', '_blank');
+    });
 });
 
-// ============================================
-// АНИМИРОВАННЫЕ ЧАСТИЦЫ
-// ============================================
-
-const canvas = document.getElementById('particles');
-const ctx = canvas.getContext('2d');
-let particles = [];
-let mouseX = 0;
-let mouseY = 0;
-
-function resizeCanvas() {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-}
-
-window.addEventListener('resize', resizeCanvas);
-resizeCanvas();
-
-class Particle {
-  constructor() {
-    this.x = Math.random() * canvas.width;
-    this.y = Math.random() * canvas.height;
-    this.size = Math.random() * 2.5 + 1;
-    this.speedX = (Math.random() - 0.5) * 0.3;
-    this.speedY = (Math.random() - 0.5) * 0.3;
-    this.opacity = Math.random() * 0.5 + 0.1;
-  }
-
-  update() {
-    this.x += this.speedX;
-    this.y += this.speedY;
-
-    if (!('ontouchstart' in window)) {
-      const dx = mouseX - this.x;
-      const dy = mouseY - this.y;
-      const distance = Math.sqrt(dx * dx + dy * dy);
-      if (distance < 100) {
-        const force = 0.02;
-        this.x += dx * force;
-        this.y += dy * force;
-      }
-    }
-
-    if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
-    if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
-  }
-
-  draw() {
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(255, 158, 181, ${this.opacity})`;
-    ctx.fill();
-  }
-}
-
-for (let i = 0; i < 60; i++) {
-  particles.push(new Particle());
-}
-
-function drawLines() {
-  for (let i = 0; i < particles.length; i++) {
-    for (let j = i + 1; j < particles.length; j++) {
-      const dx = particles[i].x - particles[j].x;
-      const dy = particles[i].y - particles[j].y;
-      const distance = Math.sqrt(dx * dx + dy * dy);
-      if (distance < 120) {
-        ctx.beginPath();
-        ctx.moveTo(particles[i].x, particles[i].y);
-        ctx.lineTo(particles[j].x, particles[j].y);
-        ctx.strokeStyle = `rgba(255, 158, 181, ${0.04 * (1 - distance / 120)})`;
-        ctx.lineWidth = 0.5;
-        ctx.stroke();
-      }
-    }
-  }
-}
-
-function animateParticles() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  particles.forEach(p => {
-    p.update();
-    p.draw();
-  });
-  drawLines();
-  requestAnimationFrame(animateParticles);
-}
-
-animateParticles();
-
-if (!('ontouchstart' in window)) {
-  document.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-  });
+// ===== МОДАЛЬНОЕ ОКНО =====
+function openModal() {
+    const overlay = document.createElement('div');
+    overlay.className = 'modal-overlay';
+    
+    const modal = document.createElement('div');
+    modal.className = 'modal-window';
+    
+    const title = document.createElement('h2');
+    title.textContent = 'Выберите канал';
+    title.className = 'modal-title';
+    
+    const buttonsContainer = document.createElement('div');
+    buttonsContainer.className = 'modal-buttons';
+    
+    // ===== КНОПКА 1: Codavrix Forum =====
+    const btn1 = document.createElement('button');
+    btn1.className = 'modal-btn';
+    btn1.innerHTML = `
+        <div class="svg-wrapper-1">
+            <div class="svg-wrapper">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                    <path fill="none" d="M0 0h24v24H0z"></path>
+                    <path fill="currentColor" d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"></path>
+                </svg>
+            </div>
+        </div>
+        <span>Codavrix Forum</span>
+    `;
+    
+    // ===== КНОПКА 2: RTP TunKirby =====
+    const btn2 = document.createElement('button');
+    btn2.className = 'modal-btn';
+    btn2.innerHTML = `
+        <div class="svg-wrapper-1">
+            <div class="svg-wrapper">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                    <path fill="none" d="M0 0h24v24H0z"></path>
+                    <path fill="currentColor" d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"></path>
+                </svg>
+            </div>
+        </div>
+        <span>RTP TunKirby</span>
+    `;
+    
+    // ===== КНОПКА 3: DeathNote =====
+    const btn3 = document.createElement('button');
+    btn3.className = 'modal-btn';
+    btn3.innerHTML = `
+        <div class="svg-wrapper-1">
+            <div class="svg-wrapper">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                    <path fill="none" d="M0 0h24v24H0z"></path>
+                    <path fill="currentColor" d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"></path>
+                </svg>
+            </div>
+        </div>
+        <span>DeathNote</span>
+    `;
+    
+    // Кнопка закрытия
+    const closeBtn = document.createElement('button');
+    closeBtn.className = 'modal-close';
+    closeBtn.textContent = '✕';
+    closeBtn.addEventListener('click', function() {
+        document.body.removeChild(overlay);
+    });
+    
+    buttonsContainer.appendChild(btn1);
+    buttonsContainer.appendChild(btn2);
+    buttonsContainer.appendChild(btn3);
+    
+    modal.appendChild(closeBtn);
+    modal.appendChild(title);
+    modal.appendChild(buttonsContainer);
+    
+    overlay.appendChild(modal);
+    document.body.appendChild(overlay);
+    
+    overlay.addEventListener('click', function(e) {
+        if (e.target === overlay) {
+            document.body.removeChild(overlay);
+        }
+    });
+    
+    // ===== ОБРАБОТЧИКИ КНОПОК =====
+    btn1.addEventListener('click', function() {
+        window.open('https://t.me/codavrix_forum', '_blank');
+        document.body.removeChild(overlay);
+    });
+    
+    btn2.addEventListener('click', function() {
+        window.open('https://t.me/RtpTunKirby', '_blank');
+        document.body.removeChild(overlay);
+    });
+    
+    btn3.addEventListener('click', function() {
+        window.open('https://t.me/DeathNote_ar1xy', '_blank');
+        document.body.removeChild(overlay);
+    });
 }
