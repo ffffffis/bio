@@ -1,76 +1,336 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Арикси | Био</title>
-    <link rel="stylesheet" href="css/style.css" />
-</head>
-<body>
+/* ===== ОБНУЛЕНИЕ ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-    <!-- ===== ФОН: НОЧНОЕ НЕБО ===== -->
-    <div class="bg-container">
-        <div class="sky-canvas"></div>
-        <div class="stars stars-1"></div>
-        <div class="stars stars-2"></div>
-        <div class="stars stars-3"></div>
-        <div class="moon"></div>
-        <div class="meteor m1"></div>
-        <div class="meteor m2"></div>
-        <div class="meteor m3"></div>
-    </div>
+html, body {
+    width: 100%;
+    min-height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #050505;
+    overflow: hidden;
+}
 
-    <!-- ===== ОСНОВНОЙ КОНТЕНТ ===== -->
-    <main class="content">
+/* ===== ФОН: НОЧНОЕ НЕБО ===== */
+.bg-container {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    min-height: 500px;
+    overflow: hidden;
+    background-color: #050505;
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 0;
+}
 
-        <!-- АВАТАР -->
-        <div class="avatar-wrapper">
-            <img src="images/avatar.jpg" alt="Арикси" class="avatar" />
-        </div>
+/* Base Sky Layer */
+.bg-container .sky-canvas {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    inset: 0;
+    background: #050505;
+}
 
-        <!-- ИМЯ И ОПИСАНИЕ -->
-        <h1 class="name">Арикси</h1>
-        <p class="subtitle">Твой проводник в мир IT</p>
+/* Generic star layer style */
+.bg-container .stars {
+    position: absolute;
+    inset: 0;
+    background-repeat: repeat;
+    pointer-events: none;
+}
 
-        <!-- КАРТОЧКИ 2x2 -->
-        <div class="cards-grid">
-            <!-- Верхний ряд -->
-            <div class="cards-row">
-                <!-- Telegram -->
-                <button class="card card1">
-                    <svg width="36" height="36" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
-                    </svg>
-                </button>
-                
-                <!-- TikTok -->
-                <button class="card card2">
-                    <svg width="36" height="36" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
-                    </svg>
-                </button>
-            </div>
-            
-            <!-- Нижний ряд -->
-            <div class="cards-row">
-                <!-- Инструменты -->
-                <button class="card card3">
-                    <svg width="36" height="36" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M19.14 12.94a7.07 7.07 0 0 0 0-1.88l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.49.49 0 0 0-.59-.22l-2.39.96a7.04 7.04 0 0 0-1.62-.94l-.36-2.54a.484.484 0 0 0-.48-.41h-3.84a.49.49 0 0 0-.48.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96a.49.49 0 0 0-.59.22L2.74 8.87a.48.48 0 0 0 .12.61l2.03 1.58a7.07 7.07 0 0 0 0 1.88l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.49.37 1.03.7 1.62.94l.36 2.54c.05.24.26.41.48.41h3.84c.22 0 .43-.17.48-.41l.36-2.54c.59-.24 1.13-.57 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32a.49.49 0 0 0-.12-.61l-2.03-1.58zM12 15.6A3.6 3.6 0 1 1 15.6 12 3.6 3.6 0 0 1 12 15.6z"/>
-                    </svg>
-                </button>
-                
-                <!-- Ключ -->
-                <button class="card card4">
-                    <svg width="36" height="36" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12.65 10C11.83 7.67 9.61 6 7 6a5 5 0 0 0-5 5 5 5 0 0 0 5 5c2.61 0 4.83-1.67 5.65-4H17v4h4v-4h2v-4H12.65zM7 14c-1.65 0-3-1.35-3-3s1.35-3 3-3 3 1.35 3 3-1.35 3-3 3z"/>
-                    </svg>
-                </button>
-            </div>
-        </div>
+/* Layer 1: Small fast twinkling stars - High density */
+.bg-container .stars-1 {
+    background-image: radial-gradient(1px 1px at 10% 10%, #fff, transparent),
+        radial-gradient(1px 1px at 30% 20%, #fff, transparent),
+        radial-gradient(1px 1px at 50% 50%, #fff, transparent),
+        radial-gradient(1px 1px at 70% 30%, #fff, transparent),
+        radial-gradient(1px 1px at 90% 10%, #fff, transparent);
+    background-size: 200px 200px;
+    animation: twinkle 3s ease-in-out infinite;
+}
 
-    </main>
+/* Layer 2: Medium slower twinkling stars */
+.bg-container .stars-2 {
+    background-image: radial-gradient(1.5px 1.5px at 20% 40%, #fff, transparent),
+        radial-gradient(1.5px 1.5px at 60% 85%, #fff, transparent),
+        radial-gradient(1.5px 1.5px at 85% 65%, #fff, transparent);
+    background-size: 300px 300px;
+    animation: twinkle 5s ease-in-out infinite 1s;
+}
 
-    <script src="js/script.js"></script>
-</body>
-</html>
+/* Layer 3: Larger, very slow twinkling stars */
+.bg-container .stars-3 {
+    background-image: radial-gradient(2px 2px at 40% 70%, #fff, transparent),
+        radial-gradient(2px 2px at 10% 80%, #fff, transparent),
+        radial-gradient(2px 2px at 80% 40%, #fff, transparent);
+    background-size: 400px 400px;
+    animation: twinkle 7s ease-in-out infinite 2s;
+}
+
+/* Meteor / Shooting Star Layer */
+.bg-container .meteor {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Meteor Tail */
+.bg-container .meteor::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 80px;
+    height: 1px;
+    background: linear-gradient(90deg, #fff, transparent);
+}
+
+/* Meteor Instances with staggered starts */
+.bg-container .m1 {
+    top: 10%;
+    left: 110%;
+    animation: shoot 8s linear infinite;
+}
+.bg-container .m2 {
+    top: 30%;
+    left: 110%;
+    animation: shoot 12s linear infinite 4s;
+}
+.bg-container .m3 {
+    top: 50%;
+    left: 110%;
+    animation: shoot 10s linear infinite 2s;
+}
+
+/* The Moon */
+.bg-container .moon {
+    position: absolute;
+    top: 15%;
+    right: 15%;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: transparent;
+    box-shadow: 15px 15px 0 0 #fdfbd3;
+    filter: drop-shadow(0 0 15px rgba(253, 251, 211, 0.4));
+    z-index: 10;
+}
+
+/* Twinkle Animation */
+@keyframes twinkle {
+    0%,
+    100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.2;
+    }
+}
+
+/* Shooting Star Animation */
+@keyframes shoot {
+    0% {
+        transform: translateX(0) translateY(0) rotate(-35deg);
+        opacity: 0;
+    }
+    5% {
+        opacity: 1;
+    }
+    15% {
+        transform: translateX(-1500px) translateY(1000px) rotate(-35deg);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(-1500px) translateY(1000px) rotate(-35deg);
+        opacity: 0;
+    }
+}
+
+/* ===== КОНТЕНТ ПОВЕРХ ФОНА ===== */
+.content {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+    text-align: center;
+}
+
+/* ===== АВАТАР ===== */
+.avatar-wrapper {
+    margin-bottom: 12px;
+}
+
+.avatar {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 50px rgba(255, 255, 255, 0.05);
+    transition: transform 0.3s;
+}
+
+.avatar:hover {
+    transform: scale(1.05);
+}
+
+/* ===== ИМЯ И ОПИСАНИЕ ===== */
+.name {
+    color: #ffffff;
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 2px;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+.subtitle {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 13px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+}
+
+/* ===== КАРТОЧКИ 2x2 ===== */
+.cards-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.cards-row {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+/* ===== ОБЩИЙ СТИЛЬ КАРТОЧЕК ===== */
+.card {
+    width: 80px;
+    height: 80px;
+    outline: none;
+    border: none;
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 15px;
+    transition: 0.25s ease-in-out;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card svg {
+    transition: fill 0.25s;
+}
+
+.card:hover {
+    scale: 1.12;
+}
+
+/* ===== КАРТОЧКА 1: TELEGRAM ===== */
+.card1 {
+    border-radius: 80px 8px 8px 8px;
+    background: rgba(255, 255, 255, 0.95);
+}
+
+.card1 svg {
+    margin-top: 1.2em;
+    margin-left: 1em;
+    fill: #0088cc;
+    width: 32px;
+    height: 32px;
+}
+
+.card1:hover {
+    background-color: #0088cc;
+}
+
+.card1:hover svg {
+    fill: #fff;
+}
+
+/* ===== КАРТОЧКА 2: TIKTOK ===== */
+.card2 {
+    border-radius: 8px 80px 8px 8px;
+    background: rgba(255, 255, 255, 0.95);
+}
+
+.card2 svg {
+    margin-top: 1.2em;
+    margin-left: -0.8em;
+    fill: #000000;
+    width: 32px;
+    height: 32px;
+}
+
+.card2:hover {
+    background-color: #000000;
+}
+
+.card2:hover svg {
+    fill: #ffffff;
+}
+
+/* ===== КАРТОЧКА 3: ИНСТРУМЕНТЫ ===== */
+.card3 {
+    border-radius: 8px 8px 8px 80px;
+    background: rgba(255, 255, 255, 0.95);
+}
+
+.card3 svg {
+    margin-top: -0.5em;
+    margin-left: 1em;
+    fill: #6c757d;
+    width: 32px;
+    height: 32px;
+}
+
+.card3:hover {
+    background-color: #6c757d;
+}
+
+.card3:hover svg {
+    fill: #fff;
+}
+
+/* ===== КАРТОЧКА 4: КЛЮЧ ===== */
+.card4 {
+    border-radius: 8px 8px 80px 8px;
+    background: rgba(255, 255, 255, 0.95);
+}
+
+.card4 svg {
+    margin-top: -0.8em;
+    margin-left: -1em;
+    fill: #f5a623;
+    width: 32px;
+    height: 32px;
+}
+
+.card4:hover {
+    background-color: #f5a623;
+}
+
+.card4:hover svg {
+    fill: #fff;
+}
