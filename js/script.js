@@ -106,7 +106,7 @@ function openModal() {
             document.body.removeChild(overlay);
         });
         
-        // ===== КНОПКА 3: DeathNote =====
+        // ===== КНОПКА 3: DeathNote ar1xy =====
         const btn3 = document.createElement('button');
         btn3.className = 'modal-btn';
         btn3.innerHTML = `
@@ -118,11 +118,11 @@ function openModal() {
                     </svg>
                 </div>
             </div>
-            <span>DeathNote</span>
+            <span>DeathNote ar1xy</span>
         `;
         btn3.addEventListener('click', function(e) {
             e.stopPropagation();
-            console.log('🔗 Переход в DeathNote');
+            console.log('🔗 Переход в DeathNote ar1xy');
             window.open('https://t.me/DeathNote_ar1xy', '_blank');
             document.body.removeChild(overlay);
         });
